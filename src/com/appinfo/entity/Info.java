@@ -1,6 +1,6 @@
 package com.appinfo.entity;
 
-public class AppInfo {
+public class Info {
 	private	Integer id;
 	private String softwareName;
 	private String APKName;

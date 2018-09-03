@@ -1,6 +1,6 @@
 package com.appinfo.entity;
 
-public class AppVersion {
+public class Version {
 	private Integer id;
 	private Integer appId;
 	private String versionInfo;

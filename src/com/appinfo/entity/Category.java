@@ -1,6 +1,6 @@
 package com.appinfo.entity;
 
-public class AppCategory {
+public class Category {
 	private Integer id;
 	private String categoryCode;
 	private String categoryName;
