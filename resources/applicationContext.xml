@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xsi:schemaLocation="http://www.springframework.org/schema/beans
+       	http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+       	http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <!-- 自动扫描cn.smbms.service下所有依赖注解 -->
+    <context:component-scan base-package="com.appinfo.service"/>
+    <!-- 扫描AOP注解 -->
+    <aop:aspectj-autoproxy/>
+    <!-- 配置DataSource -->
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+    	<property name="jndiName" value="java:comp/env/jdcb/appinfodb"/>
+    </bean>
+    <!-- sqlSessionFactory Bean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    	<property name="dataSource" ref="dataSource"></property>
+    	<property name="configLocation" value="classpath:mybatis-config.xml"></property>
+    </bean>
+    <!-- 创建cn.smbms.dao下的所有映射接口的引用 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    	<property name="basePackage" value="com.appinfo.dao"></property>
+    </bean>
+    
+</beans>
