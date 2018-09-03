@@ -1,4 +1,4 @@
-package com.appinfo.dao.appinfo;
+package com.appinfo.dao.info;
 
 public interface InfoMapper {
 

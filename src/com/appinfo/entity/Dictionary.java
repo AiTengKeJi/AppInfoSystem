@@ -1,6 +1,6 @@
 package com.appinfo.entity;
 
-public class DataDictionary {
+public class Dictionary {
 	private Integer id;
 	private String typeCode;
 	private String typeName;
