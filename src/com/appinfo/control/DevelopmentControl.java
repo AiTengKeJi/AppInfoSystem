@@ -93,5 +93,31 @@ public class DevelopmentControl {
 		return "developer/appinfoview";
 	}
 	
+	/*=======================修改APP信息========================*/
+	/**修改APP信息
+	 * 当前状态：待完成
+	 * 负责人：陈小聪
+	 * @param appId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("/app/toModify/{appId}")
+	public String toModifyAppInfo(@PathVariable Integer appId,Model model) {
+		
+		return "developer/appinfomodify";
+	}
+	
+	/*======================删除APP信息========================*/
+	/**删除APP信息
+	 * 当前状态：待完成
+	 * 负责人：李凯
+	 */
+	@RequestMapping("/app/toModify/{appId}")
+	public String delAppInfo(@PathVariable Integer appId,Model model) {
+		
+		return "developer/appinfomodify";
+	}
+	
+	
 	
 }

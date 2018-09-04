@@ -2,13 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.appinfo.dao.user.BackendUserMapper">
-	
+
 	<select id="checkUserCode" resultType="int">
-		select count(id) from backend_user where userCode = #{userCode}
+		select count(id) from
+		backend_user where userCode = #{userCode}
 	</select>
-	
+
 	<select id="checkLogin" resultType="BackendUser">
-		SELECT u.*,d.valueName AS userTypeName FROM backend_user u,data_dictionary d 
-		WHERE u.userType = d.id AND userCode = #{userCode} AND userPassword = #{userPassword}
+		SELECT u.*,d.valueName AS
+		userTypeName FROM backend_user u,data_dictionary d
+		WHERE u.userType = d.id AND userCode = #{userCode} AND userPassword =
+		#{userPassword}
 	</select>
 </mapper>
