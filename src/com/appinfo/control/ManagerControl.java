@@ -1,13 +1,21 @@
 package com.appinfo.control;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.appinfo.entity.BackendUser;
+import com.appinfo.service.user.BackendUserServiceImpl;
 
 @Controller
 @RequestMapping("/manager")
 public class ManagerControl {
+	
+	@Autowired
+	BackendUserServiceImpl backUserService;
 	
 	//跳转到管理员登录页面
 	@RequestMapping("/toLogin")
@@ -25,13 +33,22 @@ public class ManagerControl {
 	@RequestMapping("/doLogin")
 	public String doLogin(@RequestParam String userCode,
 						  @RequestParam String userPassword,
-						  Model model) {
+						  HttpServletRequest req) {
 		//登录错误提示
 		String msg = "";
-		
-		
-		model.addAttribute("error",msg);
-		return "跳转到APP列表页面";
+		BackendUser backUser = null;
+		if(backUserService.checkUserCode(userCode)>0) {
+			backUser = backUserService.checkLogin(userCode, userPassword);
+			if(backUser!=null) {
+				req.getSession().setAttribute("userSession", backUser);
+			}else {
+				msg="密码错误！";
+			}
+		}else {
+			msg="用户名不存！";
+		}
+		req.setAttribute("error",msg);
+		return "backend/main";
 	}
 	
 	

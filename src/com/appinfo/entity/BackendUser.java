@@ -8,6 +8,7 @@ public class BackendUser {
 	private Integer createdBy;
 	private String creationDate;
 	private Integer modifyBy;
+	private String userTypeName;
 	public Integer getId() {
 		return id;
 	}
@@ -49,5 +50,11 @@ public class BackendUser {
 	}
 	public void setModifyBy(Integer modifyBy) {
 		this.modifyBy = modifyBy;
+	}
+	public String getUserTypeName() {
+		return userTypeName;
+	}
+	public void setUserTypeName(String userTypeName) {
+		this.userTypeName = userTypeName;
 	}
 }

@@ -4,6 +4,6 @@
 <configuration>
 <properties resource="database.properties"/>
 	<typeAliases>
-		<package name="com.appinfo.pojo"/>
+		<package name="com.appinfo.entity"/>
 	</typeAliases>
 </configuration>
