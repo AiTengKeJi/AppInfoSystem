@@ -2,5 +2,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.appinfo.dao.user.DevUserMapper">
-	
+	<select id="devUserCode" resultType="int">
+		select count(id) from dev_user where devCode = #{devCode}
+	</select>
+	<select id="devLogin" resultType="DevUser">
+		select count(id) from dev_user where devPassword=#{devPassword}
+	</select>
 </mapper>
