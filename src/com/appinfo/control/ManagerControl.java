@@ -25,9 +25,8 @@ public class ManagerControl {
 	
 	/**
 	 * 管理员登录验证 
-	 * 是否完成：是
 	 * 当前状态：等待跳转
-	 * 操作人：李凯
+	 * 负责人：李凯
 	 * @return
 	 */
 	@RequestMapping("/doLogin")
