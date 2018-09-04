@@ -1,13 +1,24 @@
 package com.appinfo.control;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.appinfo.service.info.InfoService;
+import com.appinfo.service.version.VersionService;
 
 @Controller
 @RequestMapping("/dev")
 public class DevelopmentControl {
+	
+	@Autowired
+	InfoService appInfoService; //AppInfo业务类
+	@Autowired
+	VersionService versionService;	//版本业务类
+	
 	
 	/*=======================登录========================*/
 	/**跳转到开发者登录页面
@@ -65,4 +76,22 @@ public class DevelopmentControl {
 									  @RequestParam Integer aid) {
 		return "developer/appversionmodify";
 	}
+	
+	/*=======================查看APP信息========================*/
+	/**查看APP信息
+	 * 当前状态：待完成
+	 * 操作人：李凯
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/app/view/{appId}")
+	public String  toAppView(@PathVariable Integer appId,Model model) {
+		
+		
+		model.addAttribute("appInfo","根据appId查询AppInfo对象");
+		model.addAttribute("appVersionList","根据appId查询版本记录（集合）");
+		return "developer/appinfoview";
+	}
+	
+	
 }

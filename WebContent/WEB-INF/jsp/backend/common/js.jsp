@@ -1,5 +1,8 @@
    <!-- jQuery -->
     <script src="${pageContext.request.contextPath }/statics/js/jquery.min.js"></script>
+    <script>
+    	var path = $("#contextPath").val();
+    </script>
     <!-- Bootstrap -->
     <script src="${pageContext.request.contextPath }/statics/js/bootstrap.min.js"></script>
     <!-- FastClick -->

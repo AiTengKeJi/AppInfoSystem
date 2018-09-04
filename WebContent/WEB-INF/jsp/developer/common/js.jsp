@@ -1,7 +1,10 @@
    <!-- jQuery -->
     <script src="${ctx}/statics/js/jquery.min.js"></script>
     
-    <script stc="${ctx}/statics/js/common.js"></script>
+    <script>
+    	//项目根目录
+    	var path = $("#contextPath").val();
+    </script>
     <!-- Bootstrap -->
     <script src="${ctx}/statics/js/bootstrap.min.js"></script>
     <!-- FastClick -->

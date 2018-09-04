@@ -32,6 +32,7 @@
     <link href='${ctx}/statics/localcss/applist.css' rel='stylesheet'>
   </head>
   <body class="nav-md footer_fixed">
+  <input type="hidden" value="${ctx}" id="contextPath">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col menu_fixed">
