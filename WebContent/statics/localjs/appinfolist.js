@@ -74,7 +74,7 @@ $(".modifyVersion").on("click",function(){
 		if(versionid == null || versionid == ""){
 			alert("该APP应用无版本信息，请先增加版本信息！");
 		}else{
-			window.location.href="/version/toModify?vid="+ versionid + "&aid="+ appinfoid;
+			window.location.href=path+"/version/toModify?vid="+ versionid + "&aid="+ appinfoid;
 		}
 	}else{
 		alert("该APP应用的状态为：【"+obj.attr("statusname")+"】,不能修改其版本信息，只可进行【新增版本】操作！");
@@ -84,7 +84,7 @@ $(".modifyAppInfo").on("click",function(){
 	var obj = $(this);
 	var status = obj.attr("status");
 	if(status == "1" || status == "3"){//待审核、审核未通过状态下才可以进行修改操作
-		window.location.href="appinfomodify?id="+ obj.attr("appinfoid");
+		window.location.href=path+"/dev/app/toModify/"+ obj.attr("appinfoid");
 	}else{
 		alert("该APP应用的状态为：【"+obj.attr("statusname")+"】,不能修改！");
 	}
@@ -175,7 +175,7 @@ var saleSwitchAjax = function(appId,obj){
 
 $(".viewApp").on("click",function(){
 	var obj = $(this);
-	window.location.href="appview/"+ obj.attr("appinfoid");
+	window.location.href=path+"dev/app/view/"+ obj.attr("appinfoid");
 });
 
 $(".deleteApp").on("click",function(){
