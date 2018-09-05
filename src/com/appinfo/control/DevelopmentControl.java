@@ -56,7 +56,7 @@ public class DevelopmentControl {
 		@RequestParam(value="queryCategoryLevel1",required=false) String category1,
 		@RequestParam(value="queryCategoryLevel2",required=false) String category2,
 		@RequestParam(value="queryCategoryLevel3",required=false) String category3) {
-		
+		System.out.println("冲突测试");
 		
 		
 		
