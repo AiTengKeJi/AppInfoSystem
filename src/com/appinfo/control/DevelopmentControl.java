@@ -1,45 +1,32 @@
 package com.appinfo.control;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.appinfo.service.info.InfoService;
+import com.appinfo.entity.Category;
+import com.appinfo.service.appinfo.AppInfoService;
+import com.appinfo.service.category.CategoryService;
 import com.appinfo.service.version.VersionService;
+import com.appinfo.utils.PageUtil;
 
 @Controller
 @RequestMapping("/dev")
 public class DevelopmentControl {
 	
 	@Autowired
-	InfoService appInfoService; //AppInfo业务类
+	AppInfoService appInfoService; //AppInfo业务类
 	@Autowired
 	VersionService versionService;	//版本业务类
+	@Autowired
+	CategoryService categoryService;	//app分类业务
 	
-	
-	/*=======================登录========================*/
-	/**跳转到开发者登录页面
-	 * 当前状态：已完成
-	 * 操作人：陈小聪
-	 * @return
-	 */
-	@RequestMapping("/toLogin")
-	public String toLogin() {
-		return "devlogin";
-	}
-		
-	/**开发人员登录验证
-	 * 当前状态：待完成
-	 * 操作人：廖立挺
-	 * @return
-	 */
-	@RequestMapping("/doLogin")
-	public String doLogin() {
-		return "devlogin";
-	}
 	
 	/*=======================APP维护信息列表========================*/
 	/**显示所有数据功能正确
@@ -51,23 +38,36 @@ public class DevelopmentControl {
 	public String getAppList(Model model,
 		@RequestParam(value="pageIndex",required=false) Integer pageIndex,
 		@RequestParam(value="querySoftwareName",required=false) String softName,
-		@RequestParam(value="queryStatus",required=false) String queryStatus,
-		@RequestParam(value="queryFlatformId",required=false) String queryFlatformId,
-		@RequestParam(value="queryCategoryLevel1",required=false) String category1,
-		@RequestParam(value="queryCategoryLevel2",required=false) String category2,
-		@RequestParam(value="queryCategoryLevel3",required=false) String category3) {
+		@RequestParam(value="queryStatus",required=false) Integer queryStatus,
+		@RequestParam(value="queryFlatformId",required=false) Integer queryFlatformId,
+		@RequestParam(value="queryCategoryLevel1",required=false) Integer category1,
+		@RequestParam(value="queryCategoryLevel2",required=false) Integer category2,
+		@RequestParam(value="queryCategoryLevel3",required=false) Integer category3) {
+		PageUtil page = new PageUtil();
+		pageIndex = pageIndex==null?1:pageIndex;
+		page.setCurrentPageNo(pageIndex);
 		
 		
 		
 		
-		
+		model.addAttribute("pages",page);
 		model.addAttribute("querySoftwareName",softName);//软件名称
 		model.addAttribute("queryStatus",queryStatus);//App状态
 		model.addAttribute("queryFlatformId",queryFlatformId);//所属平台
-		model.addAttribute("queryCategoryLevel1",category1);//1级分类
-		model.addAttribute("queryCategoryLevel2",category2);//2级分类
-		model.addAttribute("queryCategoryLevel3",category3);//3级分类
+		model.addAttribute("queryCategoryLevel1",category1);
+		model.addAttribute("categoryLevel1List",categoryService.getCategoryByParentId(0));
+		model.addAttribute("queryCategoryLevel2",category2);
+		model.addAttribute("categoryLevel2List",categoryService.getCategoryByParentId(category1));
+		model.addAttribute("queryCategoryLevel3",category3);
+		model.addAttribute("categoryLevel3List",categoryService.getCategoryByParentId(category2));
 		return "developer/appinfolist";
+	}
+	
+	/*=======================根据parentId查询分类列表========================*/
+	@RequestMapping("/categorylevellist.json")
+	@ResponseBody
+	public List<Category> getCategoryByParentId(@RequestParam Integer pid){
+		return categoryService.getCategoryByParentId(pid);
 	}
 	
 	/*=======================修改APP版本信息========================*/
@@ -87,7 +87,7 @@ public class DevelopmentControl {
 	@RequestMapping("/app/view/{appId}")
 	public String  toAppView(@PathVariable Integer appId,Model model) {
 	
-		 //1
+		
 		model.addAttribute("appInfo","根据appId查询AppInfo对象");
 		model.addAttribute("appVersionList","根据appId查询版本记录（集合）");
 		return "developer/appinfoview";

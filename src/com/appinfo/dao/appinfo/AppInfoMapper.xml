@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.appinfo.dao.info.AppInfoMapper">
+	<select id="getAppInfoCount" resultType="int">
+		SELECT COUNT(id) FROM app_info
+		<where>
+			<if test="softName != null ">AND softwareName LIKE CONCAT('%',#{softName},'%')</if>
+			<if test="status != null">AND status = #{status}</if>
+			<if test="flatformId != null">AND flatformId = #{flatformId}</if>
+			<if test="cid1 != null">AND categoryLevel1 = #{cid1}</if>
+			<if test="cid2 != null">AND categoryLevel2 = #{cid2}</if>
+			<if test="cid2 != null">AND categoryLevel3 = #{cid3}</if>
+		</where>
+	</select>
+</mapper>
