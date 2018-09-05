@@ -38,7 +38,6 @@ public class DevelopmentControl {
 	 */
 	@RequestMapping("/doLogin")
 	public String doLogin() {
-		//测试修改不同的方法
 		return "devlogin";
 	}
 	
@@ -87,8 +86,8 @@ public class DevelopmentControl {
 	 */
 	@RequestMapping("/app/view/{appId}")
 	public String  toAppView(@PathVariable Integer appId,Model model) {
-		
-		
+	
+		 //1
 		model.addAttribute("appInfo","根据appId查询AppInfo对象");
 		model.addAttribute("appVersionList","根据appId查询版本记录（集合）");
 		return "developer/appinfoview";
