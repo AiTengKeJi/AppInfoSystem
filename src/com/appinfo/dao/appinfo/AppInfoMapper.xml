@@ -13,4 +13,17 @@
 			<if test="cid2 != null">AND categoryLevel3 = #{cid3}</if>
 		</where>
 	</select>
+	
+	<select>
+		SELECT * FROM app_info
+		<where>
+			<if test="softName != null ">AND softwareName LIKE CONCAT('%',#{softName},'%')</if>
+			<if test="status != null">AND status = #{status}</if>
+			<if test="flatformId != null">AND flatformId = #{flatformId}</if>
+			<if test="cid1 != null">AND categoryLevel1 = #{cid1}</if>
+			<if test="cid2 != null">AND categoryLevel2 = #{cid2}</if>
+			<if test="cid2 != null">AND categoryLevel3 = #{cid3}</if>
+		</where>
+		
+	</select>
 </mapper>
