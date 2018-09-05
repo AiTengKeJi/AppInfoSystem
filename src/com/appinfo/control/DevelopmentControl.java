@@ -38,6 +38,7 @@ public class DevelopmentControl {
 	 */
 	@RequestMapping("/doLogin")
 	public String doLogin() {
+		//测试修改不同的方法
 		return "devlogin";
 	}
 	
@@ -56,7 +57,7 @@ public class DevelopmentControl {
 		@RequestParam(value="queryCategoryLevel1",required=false) String category1,
 		@RequestParam(value="queryCategoryLevel2",required=false) String category2,
 		@RequestParam(value="queryCategoryLevel3",required=false) String category3) {
-		//测试修改不同的方法
+		
 		
 		
 		
