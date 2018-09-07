@@ -13,15 +13,15 @@
 
 <!-- Bootstrap -->
 <link
-	href="${pageContext.request.contextPath }/statics/css/bootstrap.min.css"
+	href="${pageContext.request.contextPath}/statics/css/bootstrap.min.css"
 	rel="stylesheet">
 <!-- Font Awesome -->
 <link
-	href="${pageContext.request.contextPath }/statics/css/font-awesome.min.css"
+	href="${pageContext.request.contextPath}/statics/css/font-awesome.min.css"
 	rel="stylesheet">
 <!-- NProgress -->
 <link
-	href="${pageContext.request.contextPath }/statics/css/nprogress.css"
+	href="${pageContext.request.contextPath}/statics/css/nprogress.css"
 	rel="stylesheet">
 <!-- Animate.css -->
 <link href="https://colorlib.com/polygon/gentelella/css/animate.min.css"
@@ -29,7 +29,7 @@
 
 <!-- Custom Theme Style -->
 <link
-	href="${pageContext.request.contextPath }/statics/css/custom.min.css"
+	href="${pageContext.request.contextPath}/statics/css/custom.min.css"
 	rel="stylesheet">
 </head>
 
@@ -41,7 +41,7 @@
 		<div class="login_wrapper">
 			<div class="animate form login_form">
 				<section class="login_content">
-					<form action="dologin" method="post">
+					<form action="${pageContext.request.contextPath}/login/dev/doLogin" method="post">
 						<h1>APP开发者平台</h1>
 						<div>
 							<input type="text" class="form-control" name="devCode"
@@ -51,7 +51,7 @@
 							<input type="password" class="form-control" name="devPassword"
 								placeholder="请输入密码" required="" />
 						</div>
-						<span>${error }</span>
+						<span>${error}</span>
 						<div>
 							<button type="submit" class="btn btn-success">登 录</button>
 							<button type="reset" class="btn btn-default">重 填</button>

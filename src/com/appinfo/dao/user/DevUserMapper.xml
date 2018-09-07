@@ -6,6 +6,6 @@
 		select count(id) from dev_user where devCode = #{devCode}
 	</select>
 	<select id="devLogin" resultType="DevUser">
-		select count(id) from dev_user where devPassword=#{devPassword}
+		select * from dev_user where devCode = #{devCode} AND devPassword=#{devPassword}
 	</select>
 </mapper>

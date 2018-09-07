@@ -12,15 +12,14 @@ import org.springframework.stereotype.Service;
 public class DevUserServiceImpl implements DevUserService {
 	@Autowired
 	DevUserMapper devUserMapper;
+	
 	@Override
-	public Integer devUserCode(String devCode) {
-		
+	public Integer checkDevUserCode(String devCode) {
 		return devUserMapper.devUserCode(devCode);
 	}
 
 	@Override
 	public DevUser devLogin(String devCode, String devPassword) {
-		
 		return devUserMapper.devLogin(devCode, devPassword);
 	}
 

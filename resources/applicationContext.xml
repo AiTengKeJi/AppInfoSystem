@@ -12,8 +12,6 @@
 	<!-- 自动扫描cn.smbms.service下所有依赖注解 -->
 	<context:component-scan
 		base-package="com.appinfo.service" />
-	<!-- 扫描AOP注解 -->
-	<aop:aspectj-autoproxy />
 	<!-- 配置DataSource -->
 	<bean id="dataSource"
 		class="org.springframework.jndi.JndiObjectFactoryBean">

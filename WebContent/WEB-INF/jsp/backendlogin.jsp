@@ -35,7 +35,7 @@
 		<div class="login_wrapper">
 			<div class="animate form login_form">
 				<section class="login_content">
-					<form action="${ctx}/manager/doLogin" method="post">
+					<form action="${ctx}/login/admin/doLogin" method="post">
 						<h1>后台管理系统</h1>
 						<div>
 							<input type="text" class="form-control" name="userCode"

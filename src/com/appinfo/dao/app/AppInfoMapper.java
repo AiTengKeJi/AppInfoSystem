@@ -1,4 +1,4 @@
-package com.appinfo.dao.appinfo;
+package com.appinfo.dao.app;
 
 import java.util.List;
 
@@ -20,5 +20,8 @@ public interface AppInfoMapper {
 	/**
 	 * 查询满足条件的appinfo列表
 	 */
-	List<AppInfo> getAppinfoList();
+	List<AppInfo> getAppinfoList(@Param("softName")String softName,@Param("status")Integer status,
+			@Param("flatformId")Integer flatformId,@Param("cid1")Integer cid1,
+			@Param("cid2")Integer cid2,@Param("cid3")Integer cid3,@Param("rows")Integer rows,
+			@Param("offset")Integer offset,@Param("devId") Integer devId);
 }
