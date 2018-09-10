@@ -2,6 +2,7 @@ package com.appinfo.control;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,6 +27,8 @@ import com.appinfo.service.dictionary.DictionaryService;
 import com.appinfo.service.version.VersionService;
 import com.appinfo.utils.CommonString;
 import com.appinfo.utils.PageUtil;
+import com.appinfo.entity.Version;
+
 
 @Controller
 @RequestMapping("/dev")
@@ -113,10 +116,11 @@ public class DevelopmentControl {
 	 */
 	@RequestMapping("/app/view/{appId}")
 	public String  toAppView(@PathVariable Integer appId,Model model) {
-		
-		
-		model.addAttribute("appInfo","根据appId查询AppInfo对象");
-		model.addAttribute("appVersionList","根据appId查询版本记录（集合）");
+	
+		List<Version> appVersionList=versionService.apVersionList(appId);
+		 AppInfo appInfo=appInfoService.getAppInfoById(appId);
+		 model.addAttribute("appInfo",appInfo);
+		 model.addAttribute("appVersionList",appVersionList);
 		return "developer/appinfoview";
 	}
 	
