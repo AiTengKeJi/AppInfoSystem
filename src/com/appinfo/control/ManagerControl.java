@@ -13,6 +13,11 @@ public class ManagerControl {
 	BackendUserServiceImpl backUserService;
 	
 	
+	//跳转到管理员主页面
+	@RequestMapping("/main")
+	public String toBackendMain() {
+		return "backend/main";
+	}
 	
 	
 	/*=======================跳转到applist页面========================*/

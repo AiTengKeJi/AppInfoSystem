@@ -25,5 +25,49 @@ public class AppInfoServiceImpl implements AppInfoService {
 			Integer cid3, Integer rows, Integer offset,Integer devId) {
 		return aim.getAppinfoList(softName, status, flatformId, cid1, cid2, cid3, rows, offset,devId);
 	}
+	
+	/**
+	 * 检查APKName是否存在
+	 * @param offset
+	 * @return
+	 */
+	@Override
+	public Integer checkAPKName(String APKName) {
+		return aim.checkAPKName(APKName);
+	}
 
+	@Override
+	public int saveAppInfo(AppInfo appInfo) {
+		return aim.saveAppInfo(appInfo);
+	}
+
+	@Override
+	public int modify(AppInfo appInfo) {
+		return aim.modify(appInfo);
+	}
+
+	@Override
+	public int deleteAppInfoById(Integer id) {
+		return aim.deleteAppInfoById(id);
+	}
+
+	@Override
+	public int deleteAppLogo(Integer id) {
+		return aim.deleteAppLogo(id);
+	}
+
+	@Override
+	public int updateVersionId(Integer id) {
+		return aim.updateVersionId(id);
+	}
+
+	@Override
+	public int updateSatus(Integer id) {
+		return aim.updateSatus(id);
+	}
+	
+	@Override
+	public AppInfo getAppInfoById(Integer id) {
+		return aim.getAppInfoById(id);
+	}
 }
