@@ -108,7 +108,4 @@ public class LoginControl {
 		session.removeAttribute(CommonString.USER_SESSION);
 		return "backendlogin";
 	}
-
-	
-	
 }

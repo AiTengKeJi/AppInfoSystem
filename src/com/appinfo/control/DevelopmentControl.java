@@ -282,4 +282,11 @@ public class DevelopmentControl {
 		resp.getWriter().print(msg);
 	}
 	
+	/*=======================App版本模块========================*/
+	@RequestMapping("/app/toAddVersion/{appId}")
+	public String toAddVersion(@PathVariable Integer appId) {
+		
+		return "";
+	}
+	
 }
