@@ -2,7 +2,6 @@ package com.appinfo.control;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -116,11 +115,8 @@ public class DevelopmentControl {
 	 */
 	@RequestMapping("/app/view/{appId}")
 	public String  toAppView(@PathVariable Integer appId,Model model) {
-	
-		List<Version> appVersionList=versionService.apVersionList(appId);
-		 AppInfo appInfo=appInfoService.getAppInfoById(appId);
-		 model.addAttribute("appInfo",appInfo);
-		 model.addAttribute("appVersionList",appVersionList);
+		model.addAttribute("appInfo",appInfoService.getAppInfoById(appId));
+		model.addAttribute("appVersionList",versionService.getVersionList(appId));
 		return "developer/appinfoview";
 	}
 	
@@ -163,7 +159,7 @@ public class DevelopmentControl {
 			int fileSize = 500*1024;
 			if(attach.getSize()>fileSize) { 
 				msg = "*上传文件大小不得超过500kb";
-			}else if(CommonString.checkLogoSuffixName(suffixName)) {
+			}else if(CommonString.checkLogoSuffixName(suffixName,CommonString.LOGO_SUFFIX_NAMES)) {
 				String fileName = appInfo.getAPKName()+".jpg";
 				File targetFile = new File(path,fileName);
 				if(!targetFile.exists()) 
@@ -184,9 +180,9 @@ public class DevelopmentControl {
 		}
 		req.setAttribute("fileUploadError", msg);
 		if(appInfoService.modify(appInfo)>0 && isSuccess) {
-			return "redirect:/dev/app/toModify/"+appInfo.getId();
+			return "redirect:/dev/app/list";
 		}
-		return "redirect:/dev/app/list";
+		return "redirect:/dev/app/toModify/"+appInfo.getId();
 	}
 	
 	@RequestMapping("/delLogo.json")
@@ -252,7 +248,7 @@ public class DevelopmentControl {
 		int fileSize = 500*1024;
 		if(file.getSize()>fileSize) { 
 			req.setAttribute("fileUploadError", "*上传文件大小不得超过500kb");
-		}else if(CommonString.checkLogoSuffixName(suffixName)) {
+		}else if(CommonString.checkLogoSuffixName(suffixName,CommonString.LOGO_SUFFIX_NAMES)) {
 			String fileName = appInfo.getAPKName()+".jpg";
 			File targetFile = new File(path,fileName);
 			if(!targetFile.exists()) {
@@ -281,16 +277,133 @@ public class DevelopmentControl {
 	@RequestMapping("/app/delete.json")
 	public void deleteApp(@RequestParam Integer id,HttpServletResponse resp) throws IOException {
 		resp.setContentType("text/html;charset=utf-8");
-		String msg = appInfoService.deleteAppInfoById(id)>0?"true":"false";
-		System.out.println(msg);
-		resp.getWriter().print(msg);
+		boolean flag = false;
+		if(appInfoService.deleteAppInfoById(id)>0 && versionService.deleteVersionByAppId(id)>0)
+			flag=true;
+		resp.getWriter().print(flag);
 	}
 	
 	/*=======================App版本模块========================*/
-	@RequestMapping("/app/toAddVersion/{appId}")
-	public String toAddVersion(@PathVariable Integer appId) {
-		
-		return "";
+	//跳转到添加app版本页面
+	@RequestMapping("/version/toAddVersion/{appId}")
+	public String toAddVersion(@PathVariable Integer appId,Model model) {
+		Version version = new Version();
+		version.setAppId(appId);
+		version.setAppName(appInfoService.getAppInfoById(appId).getSoftwareName());
+		model.addAttribute("appVersion",version);
+		model.addAttribute("appVersionList",versionService.getVersionList(appId));
+		return "developer/appversionadd";
+	}
+	//新增app版本信息
+	@RequestMapping("/version/doAddversion")
+	public String doAddVersion(@ModelAttribute Version version,Model model,HttpServletRequest req,
+			@RequestParam(value="a_downloadLink",required=false) MultipartFile attach) {
+		HttpSession session = req.getSession();
+		String msg = "";
+		DevUser devUser = (DevUser) session.getAttribute(CommonString.DEV_USER_SESSION);
+		version.setCreatedBy(devUser.getId());
+		//文件上传
+		String path = session.getServletContext().getRealPath("statics"+File.separator+"uploadfiles");
+		String fileName = attach.getOriginalFilename();
+		String suffixName = FilenameUtils.getExtension(fileName);//文件后缀名
+		version.setApkFileName(fileName);
+		int fileSize = 500*1024*1024;
+		boolean flag = false;
+		if(attach.getSize()>fileSize) { 
+			msg = "*上传文件大小不得超过500M";
+		}else if(CommonString.checkLogoSuffixName(suffixName,CommonString.APK_SUFFIX_NAMES)) {
+			File targetFile = new File(path,fileName);
+			if(!targetFile.exists()) 
+				targetFile.mkdirs();
+			String logoPicPath = req.getContextPath()+"/statics/uploadfiles/"+fileName;
+			String logoLocPath = path+File.separator+fileName;
+			version.setDownloadLink(logoPicPath);
+			version.setApkLocPath(logoLocPath.replace('\\', '/'));
+			try {
+				attach.transferTo(targetFile);
+				flag = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			msg ="文件格式不正确！（只能上传.apk文件）";
+		}
+		model.addAttribute("fileUploadError",msg);
+		if(flag == true && versionService.addVersion(version)>0){
+			return "redirect:/dev/app/list";
+		}else {
+			return "developer/appversionadd";
+		}
 	}
 	
+	//跳转到修改App版本信息页面
+	@RequestMapping("/version/modify/{versionId}/{appId}")
+	public String toModifyVersion(@PathVariable Integer versionId,
+			@PathVariable Integer appId,Model model) {
+		model.addAttribute("appVersionList",versionService.getVersionList(appId));
+		model.addAttribute("appVersion",versionService.getVersionById(versionId));
+		return "developer/appversionmodify";
+	}
+	
+	//修改App版本信息
+	@RequestMapping("/version/doModify")
+	public String doModifyVersion(@ModelAttribute Version version,HttpServletRequest req,
+			@RequestParam(value="attach",required=false) MultipartFile attach) {
+		HttpSession session = req.getSession();
+		boolean isSuccess = true;
+		String msg = "";
+		//获取修改者对象
+		DevUser createUser = (DevUser) session.getAttribute(CommonString.DEV_USER_SESSION);
+		version.setModifyBy(createUser.getId());
+		version.setVersionSize((attach.getSize()/1024/1024.0));
+		System.out.println("****"+version.getVersionSize());
+		System.out.println("-----"+attach.getSize());
+		//获取上传的文件名
+		String fileName = attach.getOriginalFilename();
+		//如果文件名不为空则进行文件上传
+		if(!fileName.equals("") && !fileName.equals(version.getApkFileName())) {
+			String path = session.getServletContext().getRealPath("statics"+File.separator+"uploadfiles");
+			String suffixName = FilenameUtils.getExtension(fileName);//文件后缀名
+			int fileSize = 500*1024*1024;
+			if(attach.getSize()>fileSize) { 
+				msg = "*上传文件大小不得超过500M";
+			}else if(CommonString.checkLogoSuffixName(suffixName,CommonString.APK_SUFFIX_NAMES)) {
+				File targetFile = new File(path,fileName);
+				if(!targetFile.exists()) 
+					targetFile.mkdirs();
+				String logoPicPath = req.getContextPath()+"/statics/uploadfiles/"+fileName;
+				String logoLocPath = path+File.separator+fileName;
+				version.setApkFileName(fileName);
+				version.setDownloadLink(logoPicPath);
+				version.setApkLocPath(logoLocPath.replace('\\', '/'));
+				try {
+					attach.transferTo(targetFile);
+				} catch (Exception e) {
+					isSuccess = false;
+					e.printStackTrace();
+				}
+			}else {
+				msg ="版本文件格式不正确！（目前只支持.apk格式）";
+			}
+		}
+		req.setAttribute("fileUploadError", msg);
+		if(versionService.modifyVersion(version)>0 && isSuccess) {
+			return "redirect:/dev/app/list";
+		}
+		return "redirect:/dev/version/modify/"+version.getId()+"/"+version.getAppId();
+	}
+	//删除apk版本文件
+	@RequestMapping("/delApkFile.json")
+	public void delApkFile(HttpServletResponse resp,
+			@RequestParam String filePath,@RequestParam Integer id) throws IOException {
+		resp.setContentType("text/html;charset=utf-8");
+		String msg = "false";
+		File file = new File(filePath);
+		if(versionService.updateVersionFileById(id)>0){
+			if(file.exists()) 
+				file.delete();
+			msg="true";
+		}
+		resp.getWriter().print(msg);
+	}
 }

@@ -51,12 +51,6 @@ public interface AppInfoService {
 	 * @return
 	 */
 	int deleteAppLogo(Integer id);
-	/**
-	 * 修改app版本信息
-	 * @param id
-	 * @return
-	 */
-	int updateVersionId(Integer id);
 	
 	/**
 	 * 更新app状态信息

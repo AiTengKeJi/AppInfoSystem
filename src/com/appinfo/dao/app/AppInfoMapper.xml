@@ -10,7 +10,9 @@
 				(select categoryName from app_category c where  c.id=a.categoryLevel1) as categoryLevel1Name,
 				(select categoryName from app_category c where  c.id=a.categoryLevel2) as categoryLevel2Name,
 				(select categoryName from app_category c where  c.id=a.categoryLevel3) as categoryLevel3Name,
-				(select v.versionNo from app_version v where v.id=a.versionId ) as versionNo
+				(select v.versionNo from app_version v where v.appId=a.id order by creationDate DESC limit 0,1) as versionNo,
+				(select v.id from app_version v where v.appId=a.id order by creationDate DESC limit 0,1) as versionId,
+				(select v.versionSize from app_version v where v.appId=a.id order by creationDate DESC limit 0,1)as softwareSize
 		from  app_info a where id=#{id}
 	</select>
 
@@ -33,7 +35,9 @@
 				(select categoryName from app_category c where  c.id=a.categoryLevel1) as categoryLevel1Name,
 				(select categoryName from app_category c where  c.id=a.categoryLevel2) as categoryLevel2Name,
 				(select categoryName from app_category c where  c.id=a.categoryLevel3) as categoryLevel3Name,
-				(select v.versionNo from app_version v where v.id=a.versionId ) as versionNo
+				(select v.versionNo from app_version v where v.appId=a.id order by creationDate DESC limit 0,1) as versionNo,
+				(select v.id from app_version v where v.appId=a.id order by creationDate DESC limit 0,1) as versionId,
+				(select v.versionSize from app_version v where v.appId=a.id order by creationDate DESC limit 0,1)as softwareSize
 		from  app_info a
 		<where>
 			<if test="softName != null ">AND softwareName LIKE CONCAT('%',#{softName},'%')</if>
@@ -96,12 +100,6 @@
 				logoLocPath = null 
 			where id = #{id}
 	</update>
-	<update id="updateVersionId">
-		update app_info 
-			set versionId=#{versionId}
-			where id = #{id}
-	</update>
-
 	<update id="updateSatus">
 		update app_info 
 			set status=#{status}

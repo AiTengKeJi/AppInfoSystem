@@ -58,18 +58,19 @@ $("#queryCategoryLevel2").change(function(){
 
 $(".addVersion").on("click",function(){
 	var obj = $(this);
-	window.location.href=path+"/dev/app/toAddVersion/"+obj.attr("appinfoid");
+	window.location.href=path+"/dev/version/toAddVersion/"+obj.attr("appinfoid");
 });
 $(".modifyVersion").on("click",function(){
 	var obj = $(this);
 	var status = obj.attr("status");
+	var versionNo = obj.attr("versionNo");
 	var versionid = obj.attr("versionid");
 	var appinfoid = obj.attr("appinfoid");
 	if(status == "1" || status == "3"){//待审核、审核未通过状态下才可以进行修改操作
-		if(versionid == null || versionid == ""){
+		if(versionNo == null || versionNo == ""){
 			alert("该APP应用无版本信息，请先增加版本信息！");
 		}else{
-			window.location.href=path+"/version/toModify?vid="+ versionid +"&aid="+ appinfoid;
+			window.location.href=path+"/dev/version/modify/"+ versionid +"/"+ appinfoid;
 		}
 	}else{
 		alert("该APP应用的状态为：【"+obj.attr("statusname")+"】,不能修改其版本信息，只可进行【新增版本】操作！");
@@ -104,12 +105,6 @@ var saleSwitchAjax = function(appId,obj){
 		url:appId+"/sale.json",
 		dataType:"json",
 		success:function(data){
-			/*
-			 * resultMsg:success/failed
-			 * errorCode:exception000001
-			 * appId:appId
-			 * errorCode:param000001
-			 */
 			if(data.errorCode === '0'){
 				if(data.resultMsg === "success"){//操作成功
 					if("open" === obj.attr("saleSwitch")){
@@ -169,7 +164,7 @@ var saleSwitchAjax = function(appId,obj){
 
 $(".viewApp").on("click",function(){
 	var obj = $(this);
-	window.location.href=path+"dev/app/view/"+ obj.attr("appinfoid");
+	window.location.href=path+"/dev/app/view/"+ obj.attr("appinfoid");
 });
 
 $(".deleteApp").on("click",function(){

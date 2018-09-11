@@ -57,12 +57,6 @@ public interface AppInfoMapper {
 	 * @return
 	 */
 	int deleteAppLogo(@Param("id")Integer id);
-	/**
-	 * 修改app版本信息
-	 * @param id
-	 * @return
-	 */
-	int updateVersionId(@Param("id")Integer id);
 	
 	/**
 	 * 更新app状态信息

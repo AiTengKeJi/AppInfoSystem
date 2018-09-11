@@ -25,7 +25,7 @@
 	href="${pageContext.request.contextPath}/statics/css/nprogress.css"
 	rel="stylesheet">
 <!-- Animate.css -->
-<link href="https://colorlib.com/polygon/gentelella/css/animate.min.css"
+<link href="https://unpkg.com/animate.css@3.5.2/animate.min.css"
 	rel="stylesheet">
 
 <!-- Custom Theme Style -->

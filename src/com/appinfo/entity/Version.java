@@ -1,7 +1,5 @@
 package com.appinfo.entity;
 
-import java.util.Date;
-
 public class Version {
 	private Integer id;
 	private Integer appId;
@@ -9,12 +7,16 @@ public class Version {
 	private String versionNo;
 	private Integer publishStatus;
 	private String downloadLink;
-	private float versionSize;
+	private double versionSize;
+	private Integer createdBy;
+	private String creationDate;
+	private Integer modifyBy;
 	private String publishStatusName;       //状态
 	private String appName;
-	private Date modifyDate;
+	private String modifyDate;
 	private String apkFileName;
 	private String apkLocPath;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -51,10 +53,10 @@ public class Version {
 	public void setDownloadLink(String downloadLink) {
 		this.downloadLink = downloadLink;
 	}
-	public float getVersionSize() {
+	public double getVersionSize() {
 		return versionSize;
 	}
-	public void setVersionSize(float versionSize) {
+	public void setVersionSize(double versionSize) {
 		this.versionSize = versionSize;
 	}
 	public String getAppName() {
@@ -76,10 +78,10 @@ public class Version {
 	public void setApkFileName(String apkFileName) {
 		this.apkFileName = apkFileName;
 	}
-	public Date getModifyDate() {
+	public String getModifyDate() {
 		return modifyDate;
 	}
-	public void setModifyDate(Date modifyDate) {
+	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
 	}
 	public String getApkLocPath() {
@@ -87,5 +89,23 @@ public class Version {
 	}
 	public void setApkLocPath(String apkLocPath) {
 		this.apkLocPath = apkLocPath;
+	}
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+	public String getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
+	}
+	public Integer getModifyBy() {
+		return modifyBy;
+	}
+	public void setModifyBy(Integer modifyBy) {
+		this.modifyBy = modifyBy;
 	}
 }

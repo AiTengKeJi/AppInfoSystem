@@ -62,16 +62,16 @@
 									</tr>
 								</thead>
 								<tbody>
-									<c:forEach var="appVersion" items="${appVersionList }"
+									<c:forEach var="appVersion" items="${appVersionList}"
 										varStatus="status">
 										<tr role="row" class="odd">
 											<td tabindex="0" class="sorting_1">${appVersion.appName}</td>
-											<td>${appVersion.versionNo }</td>
-											<td>${appVersion.versionSize }</td>
-											<td>${appVersion.publishStatusName }</td>
-											<td><a href="${appVersion.downloadLink }">${appVersion.apkFileName }</a>
+											<td>${appVersion.versionNo}</td>
+											<td>${appVersion.versionSize}</td>
+											<td>${appVersion.publishStatusName}</td>
+											<td><a href="${appVersion.downloadLink}">${appVersion.apkFileName}</a>
 											</td>
-											<td><fmt:formatDate value="${appVersion.modifyDate }"
+											<td><fmt:formatDate value="${appVersion.modifyDate}"
 													pattern="yyyy-MM-dd" /></td>
 										</tr>
 									</c:forEach>
@@ -92,10 +92,9 @@
 				<div class="x_content" style="display: block;">
 					<br>
 					<form class="form-horizontal form-label-left"
-						action="addversionsave" method="post"
+						action="${ctx}/dev/version/doAddversion" method="post"
 						enctype="multipart/form-data">
-						<input type="hidden" name="appId" name="appId"
-							value="${appVersion.appId}">
+						<input type="hidden" name="appId" name="appId" value="${appVersion.appId}">
 						<div class="item form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="name">版本号 <span class="required">*</span>
@@ -107,18 +106,7 @@
 									required="required">
 							</div>
 						</div>
-						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="number">版本大小 <span class="required">*</span>
-							</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="number" id="versionSize" name="versionSize"
-									required="required" data-validate-minmax="10,500"
-									placeholder="请输入版本大小，单位为Mb"
-									class="form-control col-md-7 col-xs-12">
-							</div>
-						</div>
-
+						
 						<div class="item form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="select">发布状态 <span class="required">*</span></label>
@@ -146,7 +134,7 @@
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input type="file" class="form-control col-md-7 col-xs-12"
 									name="a_downloadLink" id="a_downloadLink" required="required" />
-								${fileUploadError }
+								${fileUploadError}
 							</div>
 						</div>
 						<div class="ln_solid"></div>
@@ -163,5 +151,4 @@
 	</div>
 </div>
 <%@include file="common/footer.jsp"%>
-<script
-	src="${pageContext.request.contextPath }/statics/localjs/appversionadd.js"></script>
+<script src="${ctx}/statics/localjs/appversionadd.js"></script>

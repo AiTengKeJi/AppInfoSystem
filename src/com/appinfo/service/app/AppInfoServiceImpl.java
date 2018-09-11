@@ -57,11 +57,6 @@ public class AppInfoServiceImpl implements AppInfoService {
 	}
 
 	@Override
-	public int updateVersionId(Integer id) {
-		return aim.updateVersionId(id);
-	}
-
-	@Override
 	public int updateSatus(Integer id) {
 		return aim.updateSatus(id);
 	}
@@ -70,4 +65,6 @@ public class AppInfoServiceImpl implements AppInfoService {
 	public AppInfo getAppInfoById(Integer id) {
 		return aim.getAppInfoById(id);
 	}
+	
+	
 }

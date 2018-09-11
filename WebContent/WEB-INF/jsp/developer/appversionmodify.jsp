@@ -71,8 +71,7 @@
 											<td>${appVersion.publishStatusName}</td>
 											<td><a href="${appVersion.downloadLink}">${appVersion.apkFileName}</a>
 											</td>
-											<td><fmt:formatDate value="${appVersion.modifyDate}"
-													pattern="yyyy-MM-dd" /></td>
+											<td>${appVersion.modifyDate}</td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -92,7 +91,7 @@
 				<div class="x_content" style="display: block;">
 					<br>
 					<form class="form-horizontal form-label-left"
-						action="appversionmodifysave" method="post"
+						action="${ctx}/dev/version/doModify" method="post"
 						enctype="multipart/form-data">
 						<input type="hidden" name="id" id="id" value="${appVersion.id}">
 						<input type="hidden" name="appId" id="appId"
@@ -106,19 +105,7 @@
 									value="${appVersion.versionNo}" type="text" readonly="readonly"
 									id="versionNo" name="versionNo">
 							</div>
-						</div>
-						<div class="item form-group">
-							<label class="control-label col-md-3 col-sm-3 col-xs-12"
-								for="number">版本大小 <span class="required">*</span>
-							</label>
-							<div class="col-md-6 col-sm-6 col-xs-12">
-								<input type="number" id="versionSize" name="versionSize"
-									value="${appVersion.versionSize}" required="required"
-									data-validate-minmax="10,500" placeholder="请输入版本大小，单位为Mb"
-									class="form-control col-md-7 col-xs-12">
-							</div>
-						</div>
-
+						</div>	
 						<div class="item form-group">
 							<label class="control-label col-md-3 col-sm-3 col-xs-12"
 								for="select">发布状态 <span class="required">*</span></label>
@@ -136,8 +123,7 @@
 								<textarea id="versionInfo" name="versionInfo"
 									required="required"
 									placeholder="请输入本版本的相关信息，本信息作为该版本的详细信息进行版本介绍。"
-									class="form-control col-md-7 col-xs-12">
-              ${appVersion.versionInfo}</textarea>
+									class="form-control col-md-7 col-xs-12">${appVersion.versionInfo}</textarea>
 							</div>
 						</div>
 						<div class="item form-group">
@@ -146,14 +132,15 @@
 							</label>
 							<div class="col-md-6 col-sm-6 col-xs-12">
 								<input type="hidden" id="downloadLink" name="downloadLink"
-									value="${appVersion.downloadLink}" /> <input type="hidden"
-									id="apkLocPath" name="apkLocPath"
-									value="${appVersion.apkLocPath}" /> <input type="hidden"
-									id="apkFileName" name="apkFileName"
+									value="${appVersion.downloadLink}" required="required"/> 
+								<input type="hidden" id="apkLocPath" name="apkLocPath"
+									value="${appVersion.apkLocPath}" /> 
+								<input type="hidden" id="apkFileName" name="apkFileName"
 									value="${appVersion.apkFileName}" />
 								<div id="uploadfile" style="display: none">
-									<input id="attach" type="file"
-										class="form-control col-md-7 col-xs-12" name="attach">
+									<input id="attach" type="file" 
+									class="form-control col-md-7 col-xs-12" name="attach"
+									required="required">
 									<p>
 										<span style="color: red; font-weight: bold;">*注：1、大小不得超过500m.2、文件类型：apk</span>
 									</p>
