@@ -6,13 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.appinfo.dao.app.AppInfoMapper;
+import com.appinfo.dao.version.VersionMapper;
 import com.appinfo.entity.AppInfo;
+import com.appinfo.entity.Version;
 
 @Service
 public class AppInfoServiceImpl implements AppInfoService {
 	
 	@Autowired
 	AppInfoMapper aim;
+	@Autowired
+	VersionMapper verMap;
 	
 	@Override
 	public Integer getAppInfoCount(String softName, Integer status, Integer flatformId, Integer cid1, Integer cid2,
@@ -67,19 +71,38 @@ public class AppInfoServiceImpl implements AppInfoService {
 	}
 
 	@Override
-	public boolean upperAndLower(Integer id,Integer modifyId) {
-		AppInfo appInfo = aim.getAppInfoById(id);
+	public boolean upperAndLower(Integer appId,Integer modifyId,Integer versionId) {
+		AppInfo appInfo = aim.getAppInfoById(appId);
 		switch(appInfo.getStatus()) {
 			case 2:
 			case 5:
-				
+				this.updateAppStatus(appId,modifyId,4);
+				this.updateVersionStatus(versionId, modifyId,2);
 				break;
 			case 4:
-	
+				this.updateAppStatus(appId,modifyId,5);
 				break;
+			default:
+				return false;
 		}
-		return false;
+		return true;
 	}
 	
 	
+	//修改appinfo的状态
+	public void updateAppStatus(Integer appId,Integer modifyId,Integer status) {
+		AppInfo appInfo = new AppInfo();
+		appInfo.setId(appId);
+		appInfo.setModifyBy(modifyId);
+		appInfo.setStatus(status);
+		this.aim.modify(appInfo);
+	}
+	//修改app版本信息
+	public void updateVersionStatus(Integer versionId,Integer modifyId,Integer publishStatus) {
+		Version version = new Version();
+		version.setId(versionId);
+		version.setPublishStatus(publishStatus);
+		version.setModifyBy(modifyId);
+		verMap.modifyVersion(version);
+	}
 }

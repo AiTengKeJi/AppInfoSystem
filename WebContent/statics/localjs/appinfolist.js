@@ -102,7 +102,7 @@ $(document).on("click",".saleSwichOpen,.saleSwichClose",function(){
 var saleSwitchAjax = function(appId,obj){
 	$.ajax({
 		type:"PUT",
-		url:path+"/dev/app/"+appId+"/sale.json",
+		url:path+"/dev/app/"+appId+"/"+obj.attr("versionId")+"/sale.json",
 		dataType:"text",
 		success:function(data){
 			if(data == "true"){//操作成功

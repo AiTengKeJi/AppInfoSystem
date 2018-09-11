@@ -66,5 +66,5 @@ public interface AppInfoService {
 	 */
 	AppInfo getAppInfoById(Integer id);
 	
-	boolean upperAndLower(Integer id,Integer modifyId);
+	boolean upperAndLower(Integer id,Integer modifyId,Integer versionId);
 }
