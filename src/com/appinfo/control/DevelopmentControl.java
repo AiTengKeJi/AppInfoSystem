@@ -307,6 +307,7 @@ public class DevelopmentControl {
 		String fileName = attach.getOriginalFilename();
 		String suffixName = FilenameUtils.getExtension(fileName);//文件后缀名
 		version.setApkFileName(fileName);
+		version.setVersionSize((attach.getSize()/1024/1024.0));
 		int fileSize = 500*1024*1024;
 		boolean flag = false;
 		if(attach.getSize()>fileSize) { 
@@ -356,8 +357,6 @@ public class DevelopmentControl {
 		DevUser createUser = (DevUser) session.getAttribute(CommonString.DEV_USER_SESSION);
 		version.setModifyBy(createUser.getId());
 		version.setVersionSize((attach.getSize()/1024/1024.0));
-		System.out.println("****"+version.getVersionSize());
-		System.out.println("-----"+attach.getSize());
 		//获取上传的文件名
 		String fileName = attach.getOriginalFilename();
 		//如果文件名不为空则进行文件上传

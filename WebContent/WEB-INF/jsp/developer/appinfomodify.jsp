@@ -62,18 +62,7 @@
 								type="text">
 						</div>
 					</div>
-					<div class="item form-group">
-						<label class="control-label col-md-3 col-sm-3 col-xs-12"
-							for="number">软件大小 <span class="required">*</span>
-						</label>
-						<div class="col-md-6 col-sm-6 col-xs-12">
-							<input type="number" id="softwareSize" name="softwareSize"
-								value="${appInfo.softwareSize}" required="required"
-								data-validate-minmax="10,500" placeholder="请输入软件大小，单位为Mb"
-								class="form-control col-md-7 col-xs-12">
-						</div>
-					</div>
-
+					
 					<div class="item form-group">
 						<label class="control-label col-md-3 col-sm-3 col-xs-12"
 							for="number">下载次数 <span class="required">*</span>

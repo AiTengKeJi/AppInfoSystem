@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:mvc="http://www.springframework.org/schema/mvc"
-    xmlns:p="http://www.springframework.org/schema/p"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
@@ -17,33 +17,35 @@
 	<context:component-scan
 		base-package="com.appinfo.control"></context:component-scan>
 	<mvc:annotation-driven />
-    
-     
-	
+
+
+
 	<mvc:resources location="/statics/" mapping="/statics/**"></mvc:resources>
-	
-	 <!-- 配置多视图解析器 -->
-    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
-        <property name="favorParameter" value="true"/> 
-        <property name="defaultContentType" value="text/html" /> 
-        <property name="mediaTypes">
-            <map>
-            	<entry key="html" value="text/html; charset=UTF-8"/>
-                <entry key="json" value="application/json; charset=UTF-8"/>
-                <entry key="xml" value="application/xml; charset=UTF-8"/>
-            </map>
-        </property>
-        <property name="viewResolvers">
-            <list>
-                <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-				   <property name="prefix" value="/WEB-INF/jsp/"/>
-				   <property name="suffix" value=".jsp"/>
-			   </bean>
-            </list>
-        </property>
-    </bean>
-	
-	 <mvc:annotation-driven>
+
+	<!-- 配置多视图解析器 -->
+	<bean
+		class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="favorParameter" value="true" />
+		<property name="defaultContentType" value="text/html" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="html" value="text/html; charset=UTF-8" />
+				<entry key="json" value="application/json; charset=UTF-8" />
+				<entry key="xml" value="application/xml; charset=UTF-8" />
+			</map>
+		</property>
+		<property name="viewResolvers">
+			<list>
+				<bean
+					class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+					<property name="prefix" value="/WEB-INF/jsp/" />
+					<property name="suffix" value=".jsp" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+	<mvc:annotation-driven>
    		<mvc:message-converters>
    			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
    				<property name="supportedMediaTypes">
@@ -67,18 +69,20 @@
    			</bean>
    		</mvc:message-converters>
    </mvc:annotation-driven>
-   
-   <!-- 配置文件上传  MultipartResolver-->
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-		<property name="maxUploadSize" value="524288000"/>
-		<property name="defaultEncoding" value="UTF-8"/>
+
+	<!-- 配置文件上传 MultipartResolver -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="524288000" />
+		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
-	
+
 	<mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/dev/**"/>
-            <mvc:mapping path="/admin/**"/>
-            <bean class="com.appinfo.interceptor.LoginCheckHandlerInterceptor"/>
-        </mvc:interceptor>
-    </mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/dev/**" />
+			<mvc:mapping path="/admin/**" />
+			<bean
+				class="com.appinfo.interceptor.LoginCheckHandlerInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>

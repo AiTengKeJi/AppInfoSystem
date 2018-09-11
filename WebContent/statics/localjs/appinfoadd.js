@@ -63,8 +63,10 @@ $(function(){
 	
 	$("#APKName").bind("blur",function(){
 		if($("#APKName").val() == ""){//参数APKName为空，错误提示
-			alert("APKName为不能为空！");
+			$("#apkNameMsg").show();
+			$("#apkNameMsg").text("APKName为不能为空！");
 		}else{
+			$("#apkNameMsg").hide();
 			//ajax后台验证--APKName是否已存在
 			$.ajax({
 				type:"GET",//请求类型
@@ -73,9 +75,10 @@ $(function(){
 				dataType:"text",//ajax接口（请求url）返回的数据类型
 				success:function(data){//data：返回数据
 					if(data == "exist"){//账号不可用，错误提示
-						alert("该APKName已存在，不能使用！");
+						$("#apkNameMsg").show();
+						$("#apkNameMsg").text("该APKName已存在，不能使用！");
 					}else{//账号可用，正确提示
-						alert("该APKName可以使用！");
+						$("#apkNameMsg").hide();
 					}
 				},
 				error:function(data){//当访问时候，404，500 等非200的错误状态码

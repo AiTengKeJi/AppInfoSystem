@@ -57,11 +57,11 @@
 	</select>
 	
 	<insert id="saveAppInfo" parameterType="AppInfo">
-		insert  app_info (softwareName,APKName,supportROM,interfaceLanguage,updateDate,softwareSize,
+		insert  app_info (softwareName,APKName,supportROM,interfaceLanguage,updateDate,
 							devId,appInfo,status,onSaleDate,offSaleDate,categoryLevel1,categoryLevel2,
 							categoryLevel3,downloads,flatformId,logoPicPath,logoLocPath,createdBy,creationDate)
 				values(#{softwareName},#{APKName},#{supportROM},#{interfaceLanguage},#{updateDate},
-					   #{softwareSize},#{devId},#{appInfo},#{status},#{onSaleDate},#{offSaleDate},
+					   #{devId},#{appInfo},#{status},#{onSaleDate},#{offSaleDate},
 					   #{categoryLevel1},#{categoryLevel2},#{categoryLevel3},#{downloads},
 					   #{flatformId},#{logoPicPath},#{logoLocPath},#{createdBy},now()) 
 	</insert>
@@ -73,7 +73,6 @@
 			<if test="supportROM != null">supportROM=#{supportROM},</if>
 			<if test="interfaceLanguage != null">interfaceLanguage=#{interfaceLanguage},</if>
 			<if test="updateDate != null">updateDate=#{updateDate},</if>
-			<if test="softwareSize != null">softwareSize=#{softwareSize},</if>
 			<if test="appInfo != null">appInfo=#{appInfo},</if>
 			<if test="status != null">status=#{status},</if>
 			<if test="onSaleDate != null">onSaleDate=#{onSaleDate},</if>

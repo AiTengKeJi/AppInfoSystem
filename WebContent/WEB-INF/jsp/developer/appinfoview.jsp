@@ -109,8 +109,7 @@
 						</label>
 						<div class="col-md-6 col-sm-6 col-xs-12">
 							<textarea class="form-control col-md-7 col-xs-12"
-								readonly="readonly"> 
-              ${appInfo.appInfo}</textarea>
+								readonly="readonly">${appInfo.appInfo}</textarea>
 						</div>
 					</div>
 					<div class="item form-group">
@@ -193,10 +192,8 @@
 											<td>${appVersion.versionNo}</td>
 											<td>${appVersion.versionSize}</td>
 											<td>${appVersion.publishStatusName}</td>
-											<td><a href="${appVersion.downloadLink}">${appVersion.apkFileName}</a>
-											</td>
-											<td><fmt:formatDate value="${appVersion.modifyDate}"
-													pattern="yyyy-MM-dd" /></td>
+											<td><a href="${appVersion.downloadLink}">${appVersion.apkFileName}</a></td>
+											<td>${appVersion.modifyDate}></td>
 										</tr>
 									</c:forEach>
 								</tbody>

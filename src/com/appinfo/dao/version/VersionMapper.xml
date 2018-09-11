@@ -42,6 +42,6 @@
 	</update>
 	
 	<delete id="deleteVersionByAppId">
-		delete app_version where appId = #{appId}
+		delete from app_version where appId = #{appId}
 	</delete>
 </mapper>
