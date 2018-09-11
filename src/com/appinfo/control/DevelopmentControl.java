@@ -405,4 +405,12 @@ public class DevelopmentControl {
 		}
 		resp.getWriter().print(msg);
 	}
+	/*=======================上下架========================*/
+	@RequestMapping("/app/{appId}/sale.json")
+	public void upperAndLower(@PathVariable Integer appId,HttpSession session,
+			HttpServletResponse resp) throws IOException {
+		resp.setContentType("text/html;charset=utf-8");
+		Integer modifyId = ((DevUser)session.getAttribute(CommonString.DEV_USER_SESSION)).getId();
+		resp.getWriter().print(appInfoService.upperAndLower(appId, modifyId));
+	}
 }

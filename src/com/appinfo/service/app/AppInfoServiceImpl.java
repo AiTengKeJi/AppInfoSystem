@@ -65,6 +65,21 @@ public class AppInfoServiceImpl implements AppInfoService {
 	public AppInfo getAppInfoById(Integer id) {
 		return aim.getAppInfoById(id);
 	}
+
+	@Override
+	public boolean upperAndLower(Integer id,Integer modifyId) {
+		AppInfo appInfo = aim.getAppInfoById(id);
+		switch(appInfo.getStatus()) {
+			case 2:
+			case 5:
+				
+				break;
+			case 4:
+	
+				break;
+		}
+		return false;
+	}
 	
 	
 }
