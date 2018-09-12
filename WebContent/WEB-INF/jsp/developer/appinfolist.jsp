@@ -224,6 +224,7 @@
 															data-toggle="tooltip" data-placement="top" title=""
 															data-original-title="新增APP版本信息">新增版本</a></li>
 														<li><a class="modifyVersion"
+															id="version${appInfo.id}"
 															appinfoid="${appInfo.id}"
 															versionNo="${appInfo.versionNo}"
 															versionid="${appInfo.versionId}"
@@ -232,6 +233,7 @@
 															data-placement="top" title=""
 															data-original-title="修改APP最新版本信息">修改版本</a></li>
 														<li><a class="modifyAppInfo"
+															id="app${appInfo.id}"
 															appinfoid="${appInfo.id}" status="${appInfo.status}"
 															statusname="${appInfo.statusName}" data-toggle="tooltip"
 															data-placement="top" title=""

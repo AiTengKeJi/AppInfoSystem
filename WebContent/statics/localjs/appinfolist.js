@@ -111,6 +111,8 @@ var saleSwitchAjax = function(appId,obj){
 					obj.className="saleSwichClose";
 					obj.html("下架");
 					obj.attr("saleSwitch","close");
+					$("#app"+appId).attr("statusname","已上架");
+					$("#version"+appId).attr("statusname","已上架");
 					$("#appInfoStatus" + obj.attr("appinfoid")).css({
 						'background':'green',
 						'color':'#fff',
@@ -122,6 +124,8 @@ var saleSwitchAjax = function(appId,obj){
 				}else if("close" === obj.attr("saleSwitch")){
 					$("#appInfoStatus" + obj.attr("appinfoid")).html("已下架");
 					obj.className="saleSwichOpem";
+					$("#app"+appId).attr("statusname","已下架");
+					$("#version"+appId).attr("statusname","已下架");
 					obj.html("上架");
 					obj.attr("saleSwitch","open");
 					$("#appInfoStatus" + obj.attr("appinfoid")).css({
