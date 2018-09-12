@@ -105,4 +105,9 @@ public class AppInfoServiceImpl implements AppInfoService {
 		version.setModifyBy(modifyId);
 		verMap.modifyVersion(version);
 	}
+	@Override
+	public int updateSatus(Integer id,Integer status) {
+		// TODO Auto-generated method stub
+		return aim.updateSatus(id, status);
+	}
 }

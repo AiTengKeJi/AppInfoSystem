@@ -104,4 +104,5 @@
 			set status=#{status}
 			where id = #{id}
 	</update>
+	
 </mapper>

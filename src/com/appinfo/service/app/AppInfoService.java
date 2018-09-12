@@ -67,4 +67,10 @@ public interface AppInfoService {
 	AppInfo getAppInfoById(Integer id);
 	
 	boolean upperAndLower(Integer id,Integer modifyId,Integer versionId);
+	/**
+	 * 更新app状态信息
+	 * @param id
+	 * @return
+	 */
+	int updateSatus(Integer id,Integer status);
 }

@@ -71,4 +71,11 @@ public interface AppInfoMapper {
 	 * @return
 	 */
 	AppInfo getAppInfoById(@Param("id")Integer id);
+	
+	/**
+	 * 更新app状态信息
+	 * @param id
+	 * @return
+	 */
+	int updateSatus(@Param("id")Integer id,@Param("status")Integer status);
 }
